@@ -110,18 +110,16 @@ function A(_s,_sx,_sy,_ex,_ey,_id){
 		}
 	};
 	this.display=function(){
+		document.body.removeChild(document.getElementById(this.id));
 		var c=document.createElement("div");
 		c.id=this.id;
-		document.body.appendChild(c)
+		document.body.appendChild(c);
 		for(var i=0;i<this.grid.length;i++){
 			for(var j=0;j<this.grid[i].length;j++){
 				this.grid[i][j].display(this.id);
 			}
 		}
 	};
-	this.remove=function(){
-		document.body.removeChild(document.getElementById(this.id))
-	}
 }
 
 var a=new A(20,5,6,2,7,"c");
