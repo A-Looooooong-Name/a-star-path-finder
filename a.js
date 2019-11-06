@@ -10,20 +10,20 @@ function Node(x,y,start=false,end=false,inPath=false){
 	this.f=0,
 	this.display=function(id){
 		var d=document.createElement("div");
-		d.className="node";
+		d.id=this.x+","+this.y;
 		d.style.top=this.y*this.s+"px";
 		d.style.left=this.x*this.s+"px";
 		d.style.width=(this.s-2)+"px";
 		d.style.height=(this.s-2)+"px";
 		d.innerText="f = "+this.f+",\ng = "+this.g+",\nh = "+this.h+"\n("+this.x+", "+this.y+")";
 		if(this.start){
-			d.id="start";
+			d.className="start";
 		} else if(this.end){
-			d.id="end";
+			d.className="end";
 		} else if(this.path){
-			d.id="path";
+			d.className="path";
 		} else {
-			d.id="none";
+			d.className="node";
 		}
 		document.getElementById(id).appendChild(d);
 	}
@@ -110,19 +110,48 @@ function A(_s,_sx,_sy,_ex,_ey,_id){
 		}
 	};
 	this.display=function(){
-		document.body.removeChild(document.getElementById(this.id));
-		var c=document.createElement("div");
-		c.id=this.id;
-		document.body.appendChild(c);
-		for(var i=0;i<this.grid.length;i++){
-			for(var j=0;j<this.grid[i].length;j++){
-				this.grid[i][j].display(this.id);
+		if((this.startx===null || this.starty===null) || (this.endx===null || this.endy===null)){
+			document.body.removeChild(document.getElementById(this.id));
+			var c=document.createElement("div");
+			c.id=this.id;
+			document.body.appendChild(c);
+			for(var i=0;i<this.grid.length;i++){
+				for(var j=0;j<this.grid[i].length;j++){
+					this.grid[i][j].display(this.id);
+				}
 			}
 		}
 	};
 }
 
 var a=new A(20,5,6,2,7,"c");
+
+function change(x,y) {
+	if(document.getElementById(x+","+y).className==="start"){
+		a.startx=null;
+		a.starty=null;
+		a.endx=x;
+		a.endy=y;
+		a.grid[y][x].end=true;
+		a.grid[y][x].start=false;
+	} else if(document.getElementById(x+","+y).className==="end"){
+		a.startx=null;
+		a.starty=null;
+		a.endx=null;
+		a.endy=null;
+		a.grid[y][x].end=false;
+		a.grid[y][x].start=false;
+	} else {
+		a.startx=x;
+		a.starty=y;
+		a.endx=null;
+		a.endy=null;
+		a.grid[y][x].end=false;
+		a.grid[y][x].start=true;
+	}
+	a.display();
+}
+
 a.newGrid();
 a.find();
 a.display();
