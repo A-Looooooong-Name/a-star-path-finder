@@ -1,16 +1,20 @@
 .node{
 	position:absolute;
 	border: 1px solid black;
+	background-color:white;
 }
-#path{
+.path{
+	position:absolute;
+	border: 1px solid black;
 	background-color:lightblue;
 }
-#start{
+.start{
+	position:absolute;
+	border: 1px solid black;
 	background-color:green;
 }
-#end{
+.end{
+	position:absolute;
+	border: 1px solid black;
 	background-color:red;
-}
-#none{
-	background-color:white;
 }
