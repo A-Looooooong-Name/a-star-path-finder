@@ -111,7 +111,7 @@ function A(_s,_sx,_sy,_ex,_ey,_id){
 	};
 	this.display=function(){
 		if((this.startx===null || this.starty===null) || (this.endx===null || this.endy===null)){
-			document.body.removeChild(document.getElementById(this.id));
+			document.getElementById(this.id)===null? document.body.removeChild(document.getElementById(this.id)) : 0
 			var c=document.createElement("div");
 			c.id=this.id;
 			document.body.appendChild(c);
