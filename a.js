@@ -78,6 +78,11 @@ function A(_s,_sx,_sy,_ex,_ey,_id){
 		this.grid[this.endy][this.endx].end=true;
 	};
 	this.find=function(){
+		for(var i=0;i<this.s;i++){
+			for(var j=0;j<this.s;j++){
+				this.grid[i][j].path=false;
+			}
+		}
 		if((this.startx !== null || this.starty !== null) || (this.endx !== null || this.endy !== null)){
 			var currentNode=this.grid[this.starty][this.startx];
 
@@ -88,7 +93,6 @@ function A(_s,_sx,_sy,_ex,_ey,_id){
 					this.grid[i][j].getValueG(this.startx,this.starty);
 					this.grid[i][j].getValueH(this.endx,this.endy);
 					this.grid[i][j].getValueF();
-					this.grid[i][j].path=false;
 				}
 			}
 
